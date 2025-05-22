@@ -1,12 +1,20 @@
-from typing import Union
 from fastapi import FastAPI
+import time
 
 app = FastAPI()
 
 @app.get('/')
 async def root():
-    return {'Hello': 'World'}
+    return {"I am shake speare"}
 
-@app.get("/item/{item_id}")
-async def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+@app.get("/chatbot/{chatbotquery}")
+async def read_item(chatbotquery: str):
+    # send data to the model
+    input_data = chatbotquery
+    time.sleep(5) # simulate delay
+    output_data = f"shake_speare_says: {chatbotquery}"
+    
+    return {
+        "query" : input_data, 
+        "response": output_data
+    }
