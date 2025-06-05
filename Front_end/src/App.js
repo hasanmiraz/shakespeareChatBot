@@ -29,7 +29,7 @@ function App() {
           </div>
           <div className="chat-message gpt">
             <div className="chat-message-center">
-              <div className="avatar gpt">npm start
+              <div className="avatar gpt">
                 { /* <svg xmlns="http://www.w3.org/2000/svg" width={32} height={32} >
     <path fill="#28709F" d="M0 0h32v32H0V0Z" />
     <path
