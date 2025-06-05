@@ -73,7 +73,14 @@ const ChatPage: FC = () => {
   return (
     <div className="flex flex-col h-full p-7 rounded-lg shadow-lg overflow-hidden">
       <header className="p-4 border-b border-gray-700 bg-gray-800 rounded-lg">
-        <h2 className="text-lg font-medium text-white">Gonzago</h2>
+        <h1 className="text-lg font-large text-white">Gonzagot</h1>
+        <h2 className="text-lg font-medium text-white"> Your digital Shakespeare expert</h2>
+        <p className="mt-1 text-sm text-blue-200">
+          Ask Gonzago about characters, events, scenes and themes in Shakespeare's plays!
+        </p>
+        <p className="mt-2 text-sm text-gray-300 italic">
+          You can help Gonzago by specifying the Act and Scene name, eg: "What does the ghost say to Hamlet in Act I, Scene 1?".
+        </p>
       </header>
 
       <main className="flex-grow p-4 overflow-y-auto bg-gray-900">
