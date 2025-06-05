@@ -11,6 +11,8 @@ Other stuff: <br>
 **Frontend:** ```ReactJS``` <br>
 **Backend:** ```FastAPI``` <br>
 
+***BIG GPU IS REQUIRED***
+
 ## BE and AI setup
 create an env:
 ```
