@@ -1,14 +1,14 @@
 # shakespeareChatBot
-An Expert on shakespeare literature. it uses a quantised model with RAG to generate the most accurate result of your query.
-A breakdown of the Bot
-**Embedder:** sentence-transformers/all-mpnet-base-v2
-**Model:** Qwen/Qwen2.5-7B-Instruct
-**Dataset:** https://www.kaggle.com/datasets/kingburrito666/shakespeare-plays
-**Dataconversion Repo:** https://github.com/tabifonica/shakespeare-data-prep
+An Expert on shakespeare literature. it uses a quantised model with RAG to generate the most accurate result of your query. <br>
+A breakdown of the Bot <br>
+**Embedder:** sentence-transformers/all-mpnet-base-v2 <br>
+**Model:** Qwen/Qwen2.5-7B-Instruct <br>
+**Dataset:** https://www.kaggle.com/datasets/kingburrito666/shakespeare-plays <br>
+**Dataconversion Repo:** https://github.com/tabifonica/shakespeare-data-prep <br>
 
-other stuff:
-**Frontend:** ReactJS
-**Backend:** FastAPI
+other stuff: <br>
+**Frontend:** ReactJS <br>
+**Backend:** FastAPI <br>
 
 ## BE and AI setup
 create an env:
