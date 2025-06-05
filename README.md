@@ -7,9 +7,9 @@ An Expert on shakespeare literature. it uses a quantised model with RAG to gener
 **Dataset:** ```https://www.kaggle.com/datasets/kingburrito666/shakespeare-plays``` <br>
 **Dataconversion Repo:** ```https://github.com/tabifonica/shakespeare-data-prep``` <br>
 
-other stuff: <br>
-**Frontend:** ReactJS <br>
-**Backend:** FastAPI <br>
+Other stuff: <br>
+**Frontend:** ```ReactJS``` <br>
+**Backend:** ```FastAPI``` <br>
 
 ## BE and AI setup
 create an env:
