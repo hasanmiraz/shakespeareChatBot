@@ -12,17 +12,48 @@ import os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 # find out the act and scene number
-def extract_act_scene(text: str) -> Tuple[Optional[str], Optional[int], Optional[int]]:
+
+_ROMAN_MAP = {
+    'I': 1,   'V': 5,    'X': 10,
+    'L': 50,  'C': 100,  'D': 500,
+    'M': 1000
+}
+
+# roman num 
+def _roman_to_int(roman: str) -> int:
+    total = 0
+    prev_value = 0
+
+    for ch in reversed(roman):
+        value = _ROMAN_MAP.get(ch, 0)
+        if value < prev_value:
+            total -= value
+        else:
+            total += value
+        prev_value = value
+
+    return total
+
+# get me the scene number and act number if available
+def extract_act_scene(text: str) -> Tuple[Optional[int], Optional[int]]:
     act_number: Optional[int] = None
     scene_number: Optional[int] = None
 
-    act_match = re.search(r"Act\s*(\d+)", text, re.IGNORECASE)
+    act_match = re.search(r"Act\s*(\d+|[IVXLCDM]+)", text, re.IGNORECASE)
     if act_match:
-        act_number = int(act_match.group(1))
+        raw = act_match.group(1)
+        if raw.isdigit():
+            act_number = int(raw)
+        else:
+            act_number = _roman_to_int(raw.upper())
 
-    scene_match = re.search(r"Scene\s*(\d+)", text, re.IGNORECASE)
+    scene_match = re.search(r"Scene\s*(\d+|[IVXLCDM]+)", text, re.IGNORECASE)
     if scene_match:
-        scene_number = int(scene_match.group(1))
+        raw = scene_match.group(1)
+        if raw.isdigit():
+            scene_number = int(raw)
+        else:
+            scene_number = _roman_to_int(raw.upper())
 
     return act_number, scene_number
 
@@ -55,7 +86,7 @@ model = AutoModelForCausalLM.from_pretrained(
     trust_remote_code=True
 )
 
-print("Model loaded with 4-bit quantization. Device:", model.device)
+# print("Model loaded with 4-bit quantization. Device:", model.device)
 
 # get the embedding of user query
 def embed_query(query: str):
@@ -120,7 +151,7 @@ def build_prompt(retrieved_chunks, user_question, style="shake"):
     if style == "shake":
         tone_instruction = "Respond in Shakespearean English, quoting from these passages."
     else:
-        tone_instruction = "Respond clearly as a Shakespeare expert, quoting from these passages."
+        tone_instruction = "Respond clearly as a Shakespeare expert, quoting from these passages. \"remember previous prompts:\" field." 
 
     header = f"You are a Shakespeare expert. {tone_instruction}\n\n"
     passages = ""
@@ -130,7 +161,7 @@ def build_prompt(retrieved_chunks, user_question, style="shake"):
     return header + passages + question_block
 
 # finetuning the model for generate answers
-def generate_answer(prompt: str, max_new_tokens: int = 300, temperature: float = 0.8):
+def generate_answer(prompt: str, max_new_tokens: int = 1200, temperature: float = 0.8):
     inputs = tokenizer(prompt, return_tensors="pt", padding=True).to(model.device)
     with torch.no_grad():
         output_ids = model.generate(
@@ -149,8 +180,8 @@ def generate_answer(prompt: str, max_new_tokens: int = 300, temperature: float =
 
 # handeling user query
 def user_query(user_question: str):
-  (act, scene) = extract_act_scene(user_question)
-  top_chunks = retrieve_top_k(user_question, k=5, act=act, scene=scene)
+  (act, scene) = extract_act_scene(user_question.split("remember previous prompts:")[0])
+  top_chunks = retrieve_top_k(user_question.split("remember previous prompts:")[0], k=5, act=act, scene=scene)
   print("Retrieved passages (top 5):")
   for i, c in enumerate(top_chunks, start=1):
     print(i)
@@ -160,10 +191,10 @@ def user_query(user_question: str):
 
   print("\nGenerating answer...\n")
   answer = generate_answer(prompt, max_new_tokens=200, temperature=0.8)
-  print("=== ShakespeareBot Answer ===")
+#   print("=== ShakespeareBot Answer ===")
   print(answer)
-  print("#"*50)
+#   print("#"*50)
   
   return answer
   
-user_query("Why does Hamlet not kill Claudius. Please use only sourced form Play Hamlet, Act 3, Scene 3?")
+# user_query("Why does Hamlet not kill Claudius. Please use only sourced form Play Hamlet, Act 3, Scene 3?")
