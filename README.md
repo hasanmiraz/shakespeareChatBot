@@ -1,6 +1,6 @@
 # shakespeareChatBot
 
-## BE setup
+## BE and AI setup
 create an env:
 ```
 python -m venv venv
@@ -13,11 +13,11 @@ pip install -r 'requirements.txt'
 ### BE host
 get into BE directory:
 ```
-cd shakespeareChatBotBE
+cd shakespeareChatBot
 ```
 host BE:
 ```
-fastapi dev main.py
+uvicorn shakespeareChatBotBE.main:app --reload
 ```
 
 ## FE setup
