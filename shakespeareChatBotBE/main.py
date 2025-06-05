@@ -1,7 +1,17 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 import time
+from shakespeareChatBotAI.source.main import user_query
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get('/')
 async def root():
@@ -9,12 +19,9 @@ async def root():
 
 @app.get("/chatbot/{chatbotquery}")
 async def read_item(chatbotquery: str):
-    # send data to the model
     input_data = chatbotquery
-    time.sleep(5) # simulate delay
-    output_data = f"shake_speare_says: {chatbotquery}"
-    
+    answer = user_query(input_data)
     return {
-        "query" : input_data, 
-        "response": output_data
+        "query": input_data,
+        "response": answer
     }
