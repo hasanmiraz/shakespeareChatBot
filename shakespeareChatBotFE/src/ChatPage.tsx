@@ -81,7 +81,7 @@ const ChatPage: FC = () => {
           Ask Gonzago about characters, events, scenes and themes in Shakespeare's plays!
         </p>
         <p className="mt-2 text-sm text-gray-300 italic">
-          You can help Gonzago by specifying the Act and Scene name, eg: "What does the ghost say to Hamlet in Act I, Scene 1?".
+          You can help Gonzago by specifying the Act and Scene name, eg: "What does the ghost say to Hamlet in Act I, Scene 5?".
         </p>
       </header>
 
