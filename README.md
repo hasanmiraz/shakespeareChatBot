@@ -1,6 +1,10 @@
 # shakespeareChatBot
 An Expert on shakespeare literature. it uses a quantised model with RAG to generate the most accurate result of your query. <br>
 
+***FILE SYSTEM***
+**AI:** ```./shakespeareChatBotAI/source/main.py```
+**BE:** ```./shakespeareChatBotBE/main.py```
+
 **A breakdown of the Bot** <br>
 **Embedder:** ```sentence-transformers/all-mpnet-base-v2``` <br>
 **Model:** ```Qwen/Qwen2.5-7B-Instruct``` <br>
