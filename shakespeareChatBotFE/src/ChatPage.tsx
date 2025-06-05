@@ -73,7 +73,7 @@ const ChatPage: FC = () => {
   return (
     <div className="flex flex-col h-full p-7 rounded-lg shadow-lg overflow-hidden">
       <header className="p-4 border-b border-gray-700 bg-gray-800 rounded-lg">
-        <h1 className="text-lg font-large text-white">Gonzagot</h1>
+        <h1 className="text-lg font-large text-white">Gonzago</h1>
         <h2 className="text-lg font-medium text-white"> Your digital Shakespeare expert</h2>
         <p className="mt-1 text-sm text-blue-200">
           Ask Gonzago about characters, events, scenes and themes in Shakespeare's plays!
