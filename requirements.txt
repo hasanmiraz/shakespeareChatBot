@@ -1,1 +1,6 @@
-"fastapi[standard]"
+fastapi
+transformers
+sentence-transformers
+faiss-cpu
+accelerate
+bitsandbytes
